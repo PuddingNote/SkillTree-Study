@@ -20,5 +20,4 @@ public class SkillButton : MonoBehaviour
         skillDesText.text = SkillManager.instance.skills[skillButtonId].skillDescription;
     }
 
-
 }
