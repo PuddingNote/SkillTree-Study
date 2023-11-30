@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class SkillManager : MonoBehaviour
 {
-    public static SkillManager instance;
+    private static SkillManager instance = null;
 
     public Skill[] skills;
     public SkillButton[] skillButtons;
@@ -20,20 +20,32 @@ public class SkillManager : MonoBehaviour
     public GameObject[] checkObject; // 개별스킬들 업그레이드 checkBox
     public SkillLine[] skillLines; // 스킬라인
 
+    public static SkillManager Instance
+    {
+        get
+        {
+            if (instance == null || instance == default)
+            {
+                return null;
+            }
+            return instance;
+        }
+    }
+
     public void Awake()
     {
         if (instance == null)
         {
             instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
             if (instance != this)
             {
-                Destroy(gameObject);
+                Destroy(this.gameObject);
             }
         }
-        DontDestroyOnLoad(gameObject);
 
         uiPanel.SetActive(false);
 
